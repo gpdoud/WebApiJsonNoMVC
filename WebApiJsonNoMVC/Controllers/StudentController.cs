@@ -9,33 +9,39 @@ using WebApiJsonNoMVC.Models;
 namespace WebApiJsonNoMVC.Controllers {
     public class StudentController : ApiController {
 
-        Student[] students = new Student[] {
-            new Student("Greg", 400, 1.5),
-            new Student("Cindy", 1600, 4.5),
-            new Student("Nick", 1400, 3.5),
-            new Student("Ken", 1400, 3.5)
+        List<Student> students = new List<Student>() {
+            new Student(1, "Greg", 400, 1.5),
+            new Student(2, "Cindy", 1600, 4.5),
+            new Student(3, "Nick", 1400, 3.5),
+            new Student(4, "Ken", 1400, 3.5)
         };
  
         // GET api/<controller>
         public IEnumerable<Student> Get() {
-            return students;
+            return students.ToArray();
         }
 
         // GET api/<controller>/5
-        public string Get(int id) {
-            return "value";
+        public Student Get(int id) {
+            return students.SingleOrDefault(s => s.Id == id);
         }
 
-        // POST api/<controller>
-        public void Post([FromBody]string value) {
+        // INSERT: POST api/<controller>
+        public void Post([FromBody]Student student) {
+            students.Add(student);
         }
 
-        // PUT api/<controller>/5
-        public void Put(int id, [FromBody]string value) {
+        // UPDATE: PUT api/<controller>/5
+        public void Put(int id, [FromBody]Student student) {
+            Student studentToUpdate = students.SingleOrDefault(s => s.Id == student.Id);
+            studentToUpdate.Name = student.Name;
+            studentToUpdate.Sat = student.Sat;
+            studentToUpdate.Gpa = student.Gpa;
         }
 
         // DELETE api/<controller>/5
         public void Delete(int id) {
+            students.Remove(students.SingleOrDefault(s => s.Id == id));
         }
     }
 }
