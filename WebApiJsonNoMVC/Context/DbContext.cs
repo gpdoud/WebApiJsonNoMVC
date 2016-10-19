@@ -6,7 +6,7 @@ namespace WebApiJsonNoMVC {
 
     public partial class DbContext : System.Data.Entity.DbContext {
         public DbContext()
-            : base("name=Model1") {
+            : base("name=Education") {
         }
 
         public virtual DbSet<Student> Students { get; set; }
