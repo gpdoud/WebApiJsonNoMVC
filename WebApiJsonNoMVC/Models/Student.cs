@@ -18,5 +18,13 @@ namespace WebApiJsonNoMVC
         public int? Sat { get; set; }
 
         public double? Gpa { get; set; }
+
+        public Student(int id, string name, int sat, double gpa) {
+            Id = id;
+            Name = name;
+            Sat = sat;
+            Gpa = gpa;
+        }
+        public Student() { }
     }
 }
